@@ -3,6 +3,6 @@ import NavUI from './NavUi'
 
 export default function Navbar() {
   return (
-    <div><NavUI cartItemsCount={0}/></div>
+    <div><NavUI cartItemsCount={1} /></div>
   )
 }

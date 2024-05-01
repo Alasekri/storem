@@ -58,8 +58,9 @@ export default function ProfileMenu({ menuItems }: Props) {
                 onClick={closeMenu}
                 className="flex items-center gap-2 rounded"
               >
-                {icon}
                 <span>{label}</span>
+                {icon}
+
               </MenuItem>
             </Link>
           );
@@ -71,16 +72,17 @@ export default function ProfileMenu({ menuItems }: Props) {
               onClick={closeMenu}
               className="flex items-center gap-2 rounded"
             >
+              <span>الرئيسية</span>
               <RectangleGroupIcon className="h-4 w-4" />
-              <span>Dashboard</span>
             </MenuItem>
           </Link>
         ) : null}
 
         <MenuItem>
           <p className="flex items-center gap-2 rounded">
+          <span>تسجيل الخروج</span>
+
             <PowerIcon className="h-4 w-4" />
-            <span>Sign Out</span>
           </p>
         </MenuItem>
       </MenuList>

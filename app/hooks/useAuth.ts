@@ -8,8 +8,8 @@ interface Auth{
 export default function useAuth() : Auth {
   return {
     loading:false,
-    loggedIn:false,
-    isAdmin:false
+    loggedIn:true,
+    isAdmin:true
   };
     
 }
