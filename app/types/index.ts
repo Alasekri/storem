@@ -9,3 +9,13 @@ export interface NewUserRequest{
     email: string;
     password: string;
 }
+
+export interface EmailVerifyRequest{
+    token: string;
+    userId: string;
+}
+
+export interface SignInCredentials{
+    email: string;
+    password: string;
+}
