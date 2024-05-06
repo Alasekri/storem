@@ -94,8 +94,8 @@ export default function SignUp() {
         تسجيل
       </Button>
       <div className="flex items-center justify-between">
-        <p>لديك حساب بالفعل؟</p>
-        <Link href="/auth/signIn">تسجيل الدخول</Link>
+        <p>  لديك حساب بالفعل   ؟  <Link href="/auth/signin">  تسجيل الدخول  </Link></p>
+       
       </div>
       <div className="">
         {formErrors.map((err) => {

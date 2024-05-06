@@ -40,7 +40,7 @@ export default function SignIn() {
       });
 
       if (signInRes?.error === "CredentialsSignin") {
-        toast.error("Email/Password mismatch!");
+        toast.error("كلمة المرور أو إسم المستخدم غير صحيح");
       }
 
       if (!signInRes?.error) {
@@ -59,10 +59,10 @@ export default function SignIn() {
   };
 
   return (
-    <AuthFormContainer title="Create New Account" onSubmit={handleSubmit}>
+    <AuthFormContainer title="تسجيل الدخول" onSubmit={handleSubmit}>
       <Input
         name="email"
-        label="Email"
+        label="البريد الإلكتروني"
         value={email}
         onChange={handleChange}
         onBlur={handleBlur}
@@ -70,7 +70,7 @@ export default function SignIn() {
       />
       <Input
         name="password"
-        label="Password"
+        label="كلمة المرور"
         value={password}
         onChange={handleChange}
         onBlur={handleBlur}
@@ -78,7 +78,7 @@ export default function SignIn() {
         type="password"
       />
       <Button type="submit" className="w-full" disabled={isSubmitting}>
-        Sign in
+        دخول
       </Button>
       <div className="flex items-center justify-between">
         <Link href="/auth/signup">التسجيل</Link>
