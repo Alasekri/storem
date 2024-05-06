@@ -5,8 +5,9 @@ import { Button, Input } from "@material-tailwind/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { useFormik } from "formik";
 import * as yup from "yup";
-import { filterFormikHelpers } from "@/app/Utils/formikHelpers";
+import { filterFormikHelpers } from "@/app/utils/formikHelpers";
 import { toast } from "react-toastify";
+import Link from "next/link";
 
 const validationSchema = yup.object().shape({
   name: yup.string().required("الإسم مطلوب"),
@@ -48,10 +49,15 @@ export default function SignUp() {
   });
 
   const formErrors: string[] = filterFormikHelpers(errors, touched, values);
-
-  console.log(errors);
+  
 
   const { email, name, password } = values;
+  type valueKeys = keyof typeof values;
+  const error = (name: valueKeys) => {
+    return errors[name] && touched[name] ? true : false;
+  };
+
+
 
   return (
     <AuthFormContainer title="إنشاء حساب" onSubmit={handleSubmit}>
@@ -61,6 +67,8 @@ export default function SignUp() {
         onChange={handleChange}
         value={name}
         onBlur={handleBlur}
+        error={error("name")}
+
       />
       <Input
         name="email"
@@ -68,6 +76,9 @@ export default function SignUp() {
         onChange={handleChange}
         value={email}
         onBlur={handleBlur}
+        error={error("email")}
+
+
       />
       <Input
         name="password"
@@ -76,10 +87,16 @@ export default function SignUp() {
         onChange={handleChange}
         value={password}
         onBlur={handleBlur}
+        error={error("password")}
+
       />
       <Button disabled={isSubmitting} type="submit" className="w-full">
         تسجيل
       </Button>
+      <div className="flex items-center justify-between">
+        <p>لديك حساب بالفعل؟</p>
+        <Link href="/auth/signIn">تسجيل الدخول</Link>
+      </div>
       <div className="">
         {formErrors.map((err) => {
           return (
