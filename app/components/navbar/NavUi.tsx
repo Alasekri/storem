@@ -23,11 +23,11 @@ interface Props {
 export const menuItems = [
   {
     href: "/profile",
-    icon: <UserCircleIcon className="h-4 w-4" />,
+    icon: <UserCircleIcon className="h-5 w-5" />,
     label: "بروفايل",
   },
   {
-    icon: <ShoppingBagIcon className="h-4 w-4" />,
+    icon: <ShoppingBagIcon className="h-5 w-5" />,
     href: "/profile/orders",
     label: "الطلبيات",
   },

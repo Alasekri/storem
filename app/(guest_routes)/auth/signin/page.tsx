@@ -13,11 +13,12 @@ import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 
 const validationSchema = yup.object().shape({
-  email: yup.string().email("Invalid email").required("Email is required"),
+  email: yup.string().email("الرجاء كتابة صيغة البريد الإلكتروني example@example.example")
+  .required("البريد الإلكتروني مطلوب"),
   password: yup
     .string()
-    .min(8, "Password must be at least 8 characters")
-    .required("Password is required"),
+    .min(8, "كلمة المرور يجب ان تكون على الأقل 8 حروف")
+    .required("كلمة المرور مطلوبة"),
 });
 
 export default function SignIn() {
