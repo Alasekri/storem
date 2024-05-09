@@ -5,7 +5,7 @@ import { Button, Input } from "@material-tailwind/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { useFormik } from "formik";
 import * as yup from "yup";
-import { filterFormikHelpers } from "@/app/utils/formikHelpers";
+import { filterFormikErrors } from "@/app/utils/formikHelpers";
 import { toast } from "react-toastify";
 import Link from "next/link";
 
@@ -48,7 +48,7 @@ export default function SignUp() {
     },
   });
 
-  const formErrors: string[] = filterFormikHelpers(errors, touched, values);
+  const formErrors: string[] = filterFormikErrors(errors, touched, values);
   
 
   const { email, name, password } = values;

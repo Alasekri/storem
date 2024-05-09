@@ -28,3 +28,9 @@ export interface SessionUserProfile {
     role: "user" | "admin";
     verified: boolean;
   }
+
+  
+  
+export interface ForgetPasswordRequest{
+    email: string;
+}

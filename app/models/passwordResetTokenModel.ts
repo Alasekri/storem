@@ -1,7 +1,7 @@
 import { compare, genSalt, hash } from "bcrypt";
 import { Document, Model, ObjectId, Schema, model, models } from "mongoose";
 
-interface EmailVerificationTokenDocument extends Document {
+interface PasswordResetTokenDocument extends Document {
   user: ObjectId;
   token: string;
   createdAt: Date;
@@ -11,8 +11,8 @@ interface Methods {
   compareToken(token: string): Promise<boolean>;
 }
 
-const EmailVerificationTokenSchema = new Schema<
-  EmailVerificationTokenDocument,
+const PasswordResetTokenSchema = new Schema<
+  PasswordResetTokenDocument,
   {},
   Methods
 >({
@@ -28,11 +28,11 @@ const EmailVerificationTokenSchema = new Schema<
   createdAt: {
     type: Date,
     default: Date.now(),
-    expires: 12000000,
+    expires: 120000,
   },
 });
 
-EmailVerificationTokenSchema.pre("save", async function (next) {
+PasswordResetTokenSchema.pre("save", async function (next) {
   try {
     if (!this.isModified("token")) {
       return next();
@@ -46,7 +46,7 @@ EmailVerificationTokenSchema.pre("save", async function (next) {
   }
 });
 
-EmailVerificationTokenSchema.methods.compareToken = async function (
+PasswordResetTokenSchema.methods.compareToken = async function (
   tokenToCompare
 ) {
   try {
@@ -56,12 +56,12 @@ EmailVerificationTokenSchema.methods.compareToken = async function (
   }
 };
 
-const EmailVerificationToken =
-  models.EmailVerificationToken ||
-  model("EmailVerificationToken", EmailVerificationTokenSchema);
+const PasswordResetTokenModel =
+  models.PasswordResetToken ||
+  model("PasswordResetToken", PasswordResetTokenSchema);
 
-export default EmailVerificationToken as Model<
-  EmailVerificationTokenDocument,
+export default PasswordResetTokenModel as Model<
+  PasswordResetTokenDocument,
   {},
   Methods
 >;

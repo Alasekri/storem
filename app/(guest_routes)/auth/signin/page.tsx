@@ -3,7 +3,7 @@
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { Button, Input } from "@material-tailwind/react";
 import AuthFormContainer from "@components/AuthFormContainer";
-import { filterFormikHelpers } from "@/app/utils/formikHelpers";
+import { filterFormikErrors } from "@/app/utils/formikHelpers";
 import React from "react";
 import { useFormik } from "formik";
 import Link from "next/link";
@@ -50,7 +50,7 @@ export default function SignIn() {
     },
   });
 
-  const errorsToRender = filterFormikHelpers(errors, touched, values);
+  const errorsToRender = filterFormikErrors(errors, touched, values);
 
   type valueKeys = keyof typeof values;
 

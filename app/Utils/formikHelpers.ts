@@ -1,4 +1,4 @@
-export const filterFormikHelpers = <T extends object>(
+export const filterFormikErrors = <T extends object>(
   errors: T,
   touched: { [key: string]: boolean },
   values: T

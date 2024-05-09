@@ -35,7 +35,7 @@ export const POST = async (req:Request) => {
         from: 'verification@nextecom.com',
         to: newUser.email,
         html: `<h1>الرجاء تأكيد البريد الإلكتروني عبر ضغط <a href="${verificationUrl}">هذا الرابط</a> </h1>`
-      })
+      });
     return NextResponse.json({message: "الرجاء التحقق من البريد الإلكتروني الخاص بك."});
 };
 
