@@ -12,12 +12,12 @@ import { useRouter } from "next/navigation";
 const validationSchema = yup.object().shape({
   password1: yup
     .string()
-    .required("Password is required")
-    .min(8, "Password must be at least 8 characters long"),
+    .min(8, "كلمة المرور يجب ان تكون على الأقل 8 حروف")
+    .required("كلمة المرور مطلوبة"),
   password2: yup
     .string()
-    .oneOf([yup.ref("password1")], "Passwords must match")
-    .required("Confirm password is required"),
+    .oneOf([yup.ref("password1")], "غير مطابق")
+    .required("تأكيد كلمة المرور مطلوبة"),
 });
 
 interface Props {
