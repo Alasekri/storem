@@ -5,9 +5,9 @@ import { Button, Input } from "@material-tailwind/react";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { XMarkIcon } from "@heroicons/react/24/outline";
-import { filterFormikErrors } from "@/app/utils/formikHelpers";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
+import { filterFormikErrors } from "../utils/formikHelpers";
 
 const validationSchema = yup.object().shape({
   password1: yup
