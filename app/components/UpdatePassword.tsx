@@ -7,7 +7,7 @@ import * as yup from "yup";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
-import { filterFormikErrors } from "../utils/formikHelpers";
+import { filterFormikErrors } from "../Utils/formikHelpers";
 
 const validationSchema = yup.object().shape({
   password1: yup

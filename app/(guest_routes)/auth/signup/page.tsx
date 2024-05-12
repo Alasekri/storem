@@ -7,7 +7,7 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 import { toast } from "react-toastify";
 import Link from "next/link";
-import { filterFormikErrors } from "@/app/utils/formikHelpers";
+import { filterFormikErrors } from "@/app/Utils/formikHelpers";
 
 const validationSchema = yup.object().shape({
   name: yup.string().required("الإسم مطلوب"),
