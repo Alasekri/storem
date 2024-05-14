@@ -7,6 +7,7 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 import { toast } from "react-toastify";
 import Link from "next/link";
+import { signIn } from "next-auth/react";
 import { filterFormikErrors } from "@/app/Utils/formikHelpers";
 
 const validationSchema = yup.object().shape({
@@ -33,31 +34,36 @@ export default function SignUp() {
   } = useFormik({
     initialValues: { name: "", email: "", password: "" },
     validationSchema,
-    onSubmit: async (values ,action) => {
-      action.setSubmitting(true)
-      await fetch("/api/users", {
+    onSubmit: async (values, action) => {
+      action.setSubmitting(true);
+      const res = await fetch("/api/users", {
         method: "POST",
         body: JSON.stringify(values),
-      }).then(async (res) => {
-        if (res.ok) {
-          const {message} = await res.json() as {message:string};
-          toast.success(message)
-        }
-        action.setSubmitting(false)
       });
+      const { message, error } = (await res.json()) as {
+        message: string;
+        error: string;
+      };
+
+      if (res.ok) {
+        toast.success(message);
+        await signIn("credentials", { email, password });
+      }
+
+      if (!res.ok && error) {
+        toast.error(error);
+      }
+      action.setSubmitting(false);
     },
   });
 
   const formErrors: string[] = filterFormikErrors(errors, touched, values);
-  
 
   const { email, name, password } = values;
   type valueKeys = keyof typeof values;
   const error = (name: valueKeys) => {
     return errors[name] && touched[name] ? true : false;
   };
-
-
 
   return (
     <AuthFormContainer title="إنشاء حساب" onSubmit={handleSubmit}>
@@ -68,7 +74,6 @@ export default function SignUp() {
         value={name}
         onBlur={handleBlur}
         error={error("name")}
-
       />
       <Input
         name="email"
@@ -77,8 +82,6 @@ export default function SignUp() {
         value={email}
         onBlur={handleBlur}
         error={error("email")}
-
-
       />
       <Input
         name="password"
@@ -88,14 +91,15 @@ export default function SignUp() {
         value={password}
         onBlur={handleBlur}
         error={error("password")}
-
       />
       <Button disabled={isSubmitting} type="submit" className="w-full">
         تسجيل
       </Button>
       <div className="flex items-center justify-between">
-        <p>  لديك حساب بالفعل   ؟  <Link href="/auth/signin">  تسجيل الدخول  </Link></p>
-       
+        <p>
+          {" "}
+          لديك حساب بالفعل ؟ <Link href="/auth/signin"> تسجيل الدخول </Link>
+        </p>
       </div>
       <div className="">
         {formErrors.map((err) => {

@@ -1,4 +1,5 @@
 import startDb from "@/app/lib/db";
+import { sendEmail } from "@/app/lib/email";
 import PasswordResetTokenModel from "@/app/models/passwordResetTokenModel";
 import UserModel from "@/app/models/userModle";
 import { UpdatePasswordRequest } from "@/app/types";
@@ -38,21 +39,11 @@ export const POST = async (req: Request) => {
     await user.save();
     await PasswordResetTokenModel.findByIdAndDelete(resetToken._id);
 
+    sendEmail({
+      profile: { name: user.name, email: user.email },
+      subject: "password-changed",
+    });
 
-    const transport = nodemailer.createTransport({
-        host: "sandbox.smtp.mailtrap.io",
-        port: 2525,
-        auth: {
-          user: "cb9426a6659188",
-          pass: "313e19c65990b8"
-        }
-      });
-    
-      transport.sendMail({
-        from: 'verification@nextecom.com',
-        to: user.email,
-        html: `<h1>تم إعادة تعيين كلمة المرور بنجاح</h1>`
-      });
     
       return NextResponse.json({message: "تم إعادة تعيين كلمة المرور بنجاح."});
 
