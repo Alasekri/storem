@@ -22,7 +22,6 @@ export default function RootLayout({
 
     <html dir='rtl' lang="ar">
       <body className={inter.className}>
-        <Navbar/>
         {children}
       <Notification/>
         </body>
